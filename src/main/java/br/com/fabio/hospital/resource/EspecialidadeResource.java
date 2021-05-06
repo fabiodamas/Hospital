@@ -41,8 +41,14 @@ public class EspecialidadeResource {
      }
 
     @GetMapping
-    public  List<Especialidade> listar(){
+    public  Iterable<Especialidade> listar(){
         return especialidadeRepository.findAll();
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void remover(@PathVariable Long id) {
+        especialidadeRepository.deleteById(id);
     }
 
 }
