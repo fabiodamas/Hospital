@@ -6,8 +6,6 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
-import br.com.fabio.hospital.model.Employee;
-import br.com.fabio.hospital.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,11 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@RestController
+/* @RestController
 @CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping("/api/path1")
+*/
 public class EmployeeController {
-    @Autowired
+  /*  @Autowired
     private EmployeeRepository employeeRepository;
 
     @GetMapping("/employee")
@@ -69,4 +68,6 @@ public class EmployeeController {
         final Employee updatedEmployee = employeeRepository.save(employee);
         return ResponseEntity.ok(updatedEmployee);
     }
+
+   */
 }

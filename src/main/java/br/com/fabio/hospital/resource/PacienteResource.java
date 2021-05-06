@@ -41,8 +41,6 @@ public class PacienteResource {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-
-
     @GetMapping
     public  List<Paciente> listar(){
         return pacienteRepository.findAll();
