@@ -1,4 +1,4 @@
-package br.com.fabio.hospital.controller;
+package br.com.fabio.hospital.resource;
 
 import java.util.HashMap;
 import java.util.List;
