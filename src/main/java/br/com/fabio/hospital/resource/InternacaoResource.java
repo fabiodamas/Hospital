@@ -1,17 +1,22 @@
  package br.com.fabio.hospital.resource;
 
 import br.com.fabio.hospital.event.RecursoCriadoEvent;
+import br.com.fabio.hospital.exception.PacienteInexistenteOuInativaException;
+import br.com.fabio.hospital.exceptionhandler.HospitalExceptionHandler;
 import br.com.fabio.hospital.model.Internacao;
 import br.com.fabio.hospital.repository.InternacaoRepository;
 import br.com.fabio.hospital.service.InternacaoService;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
  @RestController
@@ -20,19 +25,16 @@ import java.util.List;
      private InternacaoRepository internacaoRepository;
      private final ApplicationEventPublisher publisher;
      private final InternacaoService internacaoService;
+     private final MessageSource messageSource;
  
-     public InternacaoResource(InternacaoRepository internacaoRepository, ApplicationEventPublisher publisher, InternacaoService pessoaService) {
+     public InternacaoResource(InternacaoRepository internacaoRepository, ApplicationEventPublisher publisher, InternacaoService internacaoService, MessageSource messageSource) {
          this.internacaoRepository = internacaoRepository;
          this.publisher = publisher;
-         this.internacaoService = pessoaService;
+         this.internacaoService = internacaoService;
+         this.messageSource = messageSource;
      }
  
-     @PostMapping
-     public ResponseEntity<Internacao> criar(@Valid @RequestBody Internacao internacao, HttpServletResponse response)  {
-         Internacao internacaoSalvo = internacaoRepository.save(internacao);
-         publisher.publishEvent(new RecursoCriadoEvent(this, response, internacaoSalvo.getId()));
-         return ResponseEntity.status(HttpStatus.CREATED).body(internacaoSalvo);
-     }
+
  
  
      @GetMapping("/{id}")
@@ -44,8 +46,6 @@ import java.util.List;
  
      @GetMapping
      public  List<Internacao> listar(){
-         int a=1;
-         a=a+2;
          return internacaoRepository.findAll();
      }
  
@@ -59,6 +59,21 @@ import java.util.List;
      public ResponseEntity<Internacao> atualizar(@PathVariable Long id, @Valid @RequestBody Internacao internacao) {
          Internacao pessoaSalva = internacaoService.atualizar(id, internacao);
          return ResponseEntity.ok(pessoaSalva);
+     }
+
+     @PostMapping
+     public ResponseEntity<Internacao> criar(@Valid @RequestBody Internacao internacao, HttpServletResponse response)  {
+         Internacao internacaoSalvo = internacaoService.salvar(internacao);
+         publisher.publishEvent(new RecursoCriadoEvent(this, response, internacaoSalvo.getId()));
+         return ResponseEntity.status(HttpStatus.CREATED).body(internacaoSalvo);
+     }
+
+     @ExceptionHandler({ PacienteInexistenteOuInativaException.class })
+     public ResponseEntity<Object> handlePessoaInexistenteOuInativaException(PacienteInexistenteOuInativaException ex) {
+         String mensagemUsuario = messageSource.getMessage("paciente.inexistente-ou-inativa", null, LocaleContextHolder.getLocale());
+         String mensagemDesenvolvedor = ex.toString();
+         List<HospitalExceptionHandler.Erro> erros = Collections.singletonList(new HospitalExceptionHandler.Erro(mensagemUsuario, mensagemDesenvolvedor));
+         return ResponseEntity.badRequest().body(erros);
      }
 
  }
