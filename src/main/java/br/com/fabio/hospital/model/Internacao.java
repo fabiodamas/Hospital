@@ -16,6 +16,7 @@ public class Internacao {
 
     private String justificativa;
 
+    @NotNull
     @Column(name="data_internacao")
     private LocalDate dataInternacao;
 
@@ -26,13 +27,16 @@ public class Internacao {
 
     private String observacao;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private TipoInternacao tipo_internacao;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name="id_especialidade")
     private Especialidade especialidade;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name="id_paciente")
     private Paciente paciente;

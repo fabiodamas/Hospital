@@ -1,9 +1,8 @@
 package br.com.fabio.hospital.repository;
 
 
-import br.com.fabio.hospital.model.Internacao;
-import br.com.fabio.hospital.model.Paciente;
 import org.springframework.data.jpa.repository.JpaRepository;
+import br.com.fabio.hospital.model.Internacao;
 import org.springframework.stereotype.Repository;
 
 @Repository

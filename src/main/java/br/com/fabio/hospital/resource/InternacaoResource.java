@@ -5,6 +5,7 @@ import br.com.fabio.hospital.model.Internacao;
 import br.com.fabio.hospital.repository.InternacaoRepository;
 import br.com.fabio.hospital.service.InternacaoService;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ import java.util.List;
      }
  
      @PostMapping
-     public ResponseEntity<Internacao> criar(@Valid @RequestBody Internacao internacao, HttpServletResponse response){
+     public ResponseEntity<Internacao> criar(@Valid @RequestBody Internacao internacao, HttpServletResponse response)  {
          Internacao internacaoSalvo = internacaoRepository.save(internacao);
          publisher.publishEvent(new RecursoCriadoEvent(this, response, internacaoSalvo.getId()));
          return ResponseEntity.status(HttpStatus.CREATED).body(internacaoSalvo);
