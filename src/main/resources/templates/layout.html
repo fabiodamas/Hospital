@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+ <title>fabioDamas Delivery</title>
+ <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+ <link rel='stylesheet' href='/webjars/bootstrap/3.4.1/css/bootstrap.min.css'>
+ <script src="/webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+ <style>
+   input.field-error, textarea.field-error { border: 1px solid #B94A48; }
+ </style>
+</head>
+<body>
+ <div class="container">
+ <nav class="navbar navbar-default navbar-static-top">
+   <div class="navbar-header">
+   
+      <a class="navbar-brand" th:href="@{/}"><img width="30px" height="30px"  th:src="@{/img/logo.png}"/></a>
+    </div>
+	<ul class="nav navbar-nav">
+	  <li><a class="brand" href="https://fabiodamas.github.io">fabiodamas.github.io</a></li>
+	</ul>
+ </nav>
+ <h1 layout:fragment="header">cabeçalho falso</h1>
+ <div layout:fragment="content">content falso</div>
+</div>
+</body>
+</html>

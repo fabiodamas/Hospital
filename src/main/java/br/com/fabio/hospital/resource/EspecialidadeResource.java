@@ -16,7 +16,7 @@ import java.net.URI;
 import java.util.List;
 
  @RestController
-@RequestMapping("/especialidades")
+@RequestMapping("/api/especialidades")
 public class EspecialidadeResource {
     private EspecialidadeRepository especialidadeRepository;
     private final ApplicationEventPublisher publisher;

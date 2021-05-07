@@ -9,18 +9,20 @@ import br.com.fabio.hospital.service.InternacaoService;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.Arrays;
+
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
  @RestController
- @RequestMapping("/internacoes")
+ @RequestMapping("/api/internacoes")
  public class InternacaoResource {
      private InternacaoRepository internacaoRepository;
      private final ApplicationEventPublisher publisher;
@@ -34,7 +36,17 @@ import java.util.List;
          this.messageSource = messageSource;
      }
  
-
+	
+     @GetMapping("/buscar")
+     public List<Internacao> getBuscarInternacao(
+             @RequestParam(name = "dataInicio", required=true) 
+                 @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataInicio,
+             @RequestParam(name = "dataFim", required=false) 
+                 @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataFim) {		
+         // return shopService.getShopsByFilter(dataInicio, dataFim, valorMinimo);
+         
+         return  internacaoRepository.findByFilter(dataInicio, dataFim);
+     }
  
  
      @GetMapping("/{id}")
@@ -75,5 +87,7 @@ import java.util.List;
          List<HospitalExceptionHandler.Erro> erros = Collections.singletonList(new HospitalExceptionHandler.Erro(mensagemUsuario, mensagemDesenvolvedor));
          return ResponseEntity.badRequest().body(erros);
      }
+
+ 
 
  }

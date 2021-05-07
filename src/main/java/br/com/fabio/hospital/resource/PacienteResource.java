@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pacientes")
+@RequestMapping("/api/pacientes")
 public class PacienteResource {
     private PacienteRepository pacienteRepository;
     private final ApplicationEventPublisher publisher;

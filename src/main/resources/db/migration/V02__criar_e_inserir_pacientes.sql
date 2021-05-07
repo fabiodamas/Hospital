@@ -8,4 +8,14 @@ CREATE TABLE paciente
 INSERT INTO paciente
             (nome, ativo)
      VALUES ('amelia', true),
-            ('joao', true);
+            ('bruna', true),
+            ('carla', true),
+            ('daniel', true),
+            ('elaine', true),
+            ('fabio', true),
+            ('gustavo', true),
+            ('helton', true),
+            ('ilda', true),
+            ('juliano', true),
+            ('ludmila', true),
+            ('marcia', true);

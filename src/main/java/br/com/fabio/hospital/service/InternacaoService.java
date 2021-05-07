@@ -7,7 +7,6 @@ import br.com.fabio.hospital.repository.InternacaoRepository;
 import br.com.fabio.hospital.repository.PacienteRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

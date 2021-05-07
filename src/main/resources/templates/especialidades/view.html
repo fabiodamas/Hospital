@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+ <title>especialidade</title>
+</head>
+<body>
+	<h1 layout:fragment="header">especialidade</h1>
+	<div layout:fragment="content" class="well">
+		<div class="alert alert-success" th:if="${globalMessage}"
+			th:text="${globalMessage}">especialidade gravado com sucesso</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Endereço</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td id="id" th:text="${especialidade.id}">123</td>
+					<td id="nome" th:text="${especialidade.nome}">Nome...</td>
+					<td id="endereco" th:text="${especialidade.endereco}">Endereco...</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="pull-left">
+			<a href="form.html" th:href="@{'/especialidades/alterar/' + ${especialidade.id}}">alterar</a>
+			| <a href="especialidades" th:href="@{'/especialidades/remover/' + ${especialidade.id}}">remover</a>
+		    | <a th:href="@{/especialidades/}" href="list.html">voltar</a>
+		</div>
+	</div>
+</body>
+</html>
