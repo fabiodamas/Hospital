@@ -2,7 +2,7 @@ CREATE TABLE especialidade
   (
         id BIGINT(20) PRIMARY KEY auto_increment
      ,nome VARCHAR(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ;
 
 INSERT INTO especialidade
             (nome)

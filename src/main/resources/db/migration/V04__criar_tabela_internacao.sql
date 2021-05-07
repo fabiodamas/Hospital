@@ -10,7 +10,7 @@ CREATE TABLE internacao (
                             id_paciente BIGINT(20) NOT NULL,
                             FOREIGN KEY (id_especialidade) REFERENCES especialidade(id),
                             FOREIGN KEY (id_paciente) REFERENCES paciente(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ;
 
 
 INSERT INTO internacao (justificativa, data_internacao, data_alta, valor, observacao, tipo_internacao, id_especialidade, id_paciente) values ('teste1', '2021-05-06', null, 10.00, '', 'ELETIVA', 20, 1);
