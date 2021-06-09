@@ -3,6 +3,8 @@
 import br.com.fabio.hospital.event.RecursoCriadoEvent;
 import br.com.fabio.hospital.model.Especialidade;
 import br.com.fabio.hospital.repository.EspecialidadeRepository;
+import io.swagger.annotations.ApiOperation;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -15,8 +17,9 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
- @RestController
+@RestController
 @RequestMapping("/api/especialidades")
+@ApiOperation(value = "Controle de especialidades", notes = "")
 public class EspecialidadeResource {
     private EspecialidadeRepository especialidadeRepository;
     private final ApplicationEventPublisher publisher;
@@ -27,6 +30,7 @@ public class EspecialidadeResource {
     }
 
     @PostMapping
+    @ApiOperation(value = "Cria uma nova especialidade", notes = "")
     public ResponseEntity<Especialidade> criar(@Valid @RequestBody Especialidade especialidade, HttpServletResponse response){
         Especialidade especialidadeSalva = especialidadeRepository.save(especialidade);
         publisher.publishEvent(new RecursoCriadoEvent(this, response, especialidadeSalva.getId()));

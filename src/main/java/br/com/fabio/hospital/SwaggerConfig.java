@@ -3,9 +3,7 @@ package br.com.fabio.hospital;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.google.common.base.Predicates;
-
-import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
@@ -29,22 +27,13 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfo(
-                "My REST API",
-                "Some custom description of API.",
-                "API TOS",
-                "Terms of service",
-                new Contact("John Doe", "www.example.com", "myeaddress@company.com"),
-                "License of API", "API license URL", Collections.emptyList());
+        return new ApiInfoBuilder()
+        .title("Hospital API")
+        .description("Um exemplo de aplicação Spring Boot REST API")
+        .version("1.0.0")
+        .license("Apache License Version 2.0")
+        .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
+        .contact(new Contact("Fábio Damas", "https://fabiodamas.github.io", "fabio.damas@gmail.com"))
+        .build();
     }
-
 }
-
-    /*
-    @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2).select()
-                .apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.boot")))
-                .paths(PathSelectors.any()).build();
-    }
-     */
